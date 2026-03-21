@@ -1,0 +1,453 @@
+Script started on 2026-03-15 01:28:46+07:00 [TERM="dumb" TTY="/dev/pts/81" COLUMNS="68" LINES="41"]
+eltex-pg2-v21@eltex-2026-spring:~$ clear
+
+---------------------------------------------------------------------------------
+1. Создайте на сервере для 1 практики ключ ssh при помощи программы sshkeygen
+---------------------------------------------------------------------------------
+
+
+
+eltex-pg2-v21@eltex-2026-spring:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/eltex-pg2-v21/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/eltex-pg2-v21/.ssh/id_rsa
+Your public key has been saved in /home/eltex-pg2-v21/.ssh/id_rsa.pub
+
+------------------------------------------------------------------------------
+2.Скопируйте созданный ключ на сервер для 2 практики для пользователя root
+при помощи программы ssh-copy-id
+------------------------------------------------------------------------------
+
+
+eltex-pg2-v21@eltex-2026-spring:~$ ssh-copy-id	root@172.16.9.221
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/eltex-pg2-v21/.ssh/id_rsa.pub"
+
+The authenticity of host '172.16.9.221 (172.16.9.221)' can't be established.
+ED25519 key fingerprint is SHA256:YNVzj+RtetZfXv5XUn/CUjeEcaMD4eg3jy8EuGGIS+o.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+
+root@172.16.9.221's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:	  "ssh 'root@172.16.9.221'"
+and check to make sure that only the key(s) you wanted were added.
+
+
+----------------------------------------------------------------------------------------------------------
+3. Подключитесь к серверу для 2 практики под пользователем root и сравните содержимое файла
+ открытого ключа на сервере 1 ~/.ssh/*.pub и файла ~/.ssh/authorized_keys на сервере для 2 практики,
+ а так же права доступа для каждого из файлов
+----------------------------------------------------------------------------------------------------------
+
+
+eltex-pg2-v21@eltex-2026-spring:~$ cat ~/.ssh/*.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEC2hRUvH4P47owfZEO/eua2zpwah3tKvX0rkNbSphu3Ief/f4XwUuFRwzhuY7FI7LhONk/ixA4pdG7Qd/wLanp9svv7hZ5/aaOE1FMNNwrS9MFmXV2ZP6Fk0v5D/bq0ps/1a/tBc4B3BWUE1QHNfwPXDE9/EWSISWsSzMCkVWOiv8dovhkcehfWFcqqXQr9LJhHMo/LerAHecwL57DyBlKg4c34WeDhnT3H70149X9ure7YzcSBO2CuUlYAERwd8bq4HnT/Wd8bgwjZZH7dr8w0ptgWYnZ+kPzCiiJw+X6V4wKYgFoKfsen0gJjiPSXmZPO4avvie0Qc7oskkDKSNWHSdjPCLccKqFAdrNkNiRmykw1LSLqO2ybFEE75OOW1sl943GfEBk2H7M73MYyBVHyiMI613m1GnhlRopRLtFyOqIY5oP1TXW5+HO+9al49Z0k5nGticOmxe0OQy1VZcb5SUc/MIO1ZVglk6Bl3H0mj6FuNg1U7dBrK2weHC7P8= eltex-pg2-v21@eltex-2026-spring
+
+eltex-pg2-v21@eltex-2026-spring:~$ ls -la ~/.ssh/*.pub
+-rw-r--r-- 1 eltex-pg2-v21 eltex-pg2-v21 585 Mar 15 01:29 /home/eltex-pg2-v21/.ssh/id_rsa.pub
+
+
+eltex-pg2-v21@eltex-2026-spring:~$ exit
+Script started on 2026-03-15 02:08:12+07:00 [TERM="dumb" TTY="/dev/pts/113" COLUMNS="112" LINES="33"]
+eltex-pg2-v21@eltex-2026-spring:~$ clear
+eltex-pg2-v21@eltex-2026-spring:~$ sshtroot@172.16.9.221
+Welcome to Ubuntu 24.04.2 LTS (GNU/Linux 6.8.0-55-generic x86_64)
+....
+root@eltex-practice2-pg2-v21:~# cat ~/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEC2hRUvH4P47owfZEO/eua2zpwah3tKvX0rkNbSphu3Ief/f4XwUuFRwzhuY7FI7LhONk/ixA4pdG7Qd/wLanp9svv7hZ5/aaOE1FMNNwrS9MFmXV2ZP6Fk0v5D/bq0ps/1a/tBc4B3BWUE1QHNfwPXDE9/EWSISWsSzMCkVWOiv8dovhkcehfWFcqqXQr9LJhHMo/LerAHecwL57DyBlKg4c34WeDhnT3H70149X9ure7YzcSBO2CuUlYAERwd8bq4HnT/Wd8bgwjZZH7dr8w0ptgWYnZ+kPzCiiJw+X6V4wKYgFoKfsen0gJjiPSXmZPO4avvie0Qc7oskkDKSNWHSdjPCLccKqFAdrNkNiRmykw1LSLqO2ybFEE75OOW1sl943GfEBk2H7M73MYyBVHyiMI613m1GnhlRopRLtFyOqIY5oP1TXW5+HO+9al49Z0k5nGticOmxe0OQy1VZcb5SUc/MIO1ZVglk6Bl3H0mj6FuNg1U7dBrK2weHC7P8= eltex-pg2-v21@eltex-2026-spring
+
+--------------------------------------------------------------------------------------------
+4.Создайте пользователя user1 при помощи команды useradd, укажите необходимость создания
+ домашнего каталога и shell /bin/bash. Создайте пароль пользователю user1
+--------------------------------------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:~# useradd -m -s /bin/bash user1
+
+root@eltex-practice2-pg2-v21:~# passwdd user1
+New password:
+Retype new password:
+passwd: password updated successfully
+
+
+-------------------------------------------------------------------
+5.Создайте пользователя user2 и user3 при помощи команды adduser
+-------------------------------------------------------------------
+
+
+root@eltex-practice2-pg2-v21:~# adduser user2
+info: Adding user `user2' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `user2' (1002) ...
+info: Adding new user `user2' (1002) with group `user2 (1002)' ...
+info: Creating home directory `/home/user2' ...
+info: Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for user2
+Enter the new value, or press ENTER for the default
+	Full Name []:
+	Room Number []:
+	Work Phone []:
+	Home Phone []:
+	Other []:
+Is the information correct? [Y/n] y
+info: Adding new user `user2' to supplemental / extra groups `users' ...
+info: Adding user `user2' to group `users' ...
+root@eltex-practice2-pg2-v21:~# adduser user3
+info: Adding user `user3' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `user3' (1003) ...
+info: Adding new user `user3' (1003) with group `user3 (1003)' ...
+info: Creating home directory `/home/user3' ...
+info: Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for user3
+Enter the new value, or press ENTER for the default
+	Full Name []:
+	Room Number []:
+	Work Phone []:
+	Home Phone []:
+	Other []:
+Is the information correct? [Y/n] y
+info: Adding new user `user3' to supplemental / extra groups `users' ...
+info: Adding user `user3' to group `users' ...
+
+
+-------------------------------------------------------------------------------------------------------
+6.Для пользователя user3 смените shell на /usr/sbin/nologin (man usermod),
+ выполните вход под этим пользователем при помощи утилиты su, сначала без дополнительных параметров,
+ затем с явным указанием shell /bin/bash в параметрах su. Выполните logout
+-------------------------------------------------------------------------------------------------------
+
+
+root@eltex-practice2-pg2-v21:~# usermod -s /usr/sbin/nologin user3
+root@eltex-practice2-pg2-v21:~# su user3
+This account is currently not available.
+root@eltex-practice2-pg2-v21:~# su --shell /bin/bash user3
+user3@eltex-practice2-pg2-v21:/root$ logout
+bash: logout: not login shell: use `exit'
+user3@eltex-practice2-pg2-v21:/root$ exit
+exit
+
+
+-------------------------------------------------------------------------------------------------------
+7.Создайте новую группу и добавьте её для всех пользователей user* как дополнительную,
+ посмотрите список групп всех пользователей user*
+-------------------------------------------------------------------------------------------------------
+
+
+root@eltex-practice2-pg2-v21:~# usermod -a -G group user1
+root@eltex-practice2-pg2-v21:~# usermod -a -G group user2
+root@eltex-practice2-pg2-v21:~# usermod -a -G group user3
+root@eltex-practice2-pg2-v21:~# groups user1 user2 user3
+user1 : user1 group
+user2 : user2 users group
+user3 : user3 users group
+
+-------------------------------------------------------------------------------------------
+8.Создайте каталог /opt/share и назначьте группу из предыдущего пункта его владельцем,
+ установите на этот каталог бит SGID, права для группы rwx.
+-------------------------------------------------------------------------------------------
+ 
+
+root@eltex-practice2-pg2-v21:~#mkdir -p /opt/share
+root@eltex-practice2-pg2-v21:~#
+root@eltex-practice2-pg2-v21:~# chown :group /opt/share
+root@eltex-practice2-pg2-v21:~# chmod 2770 /opt/share
+root@eltex-practice2-pg2-v21:~# clear
+root@eltex-practice2-pg2-v21:~#
+
+
+-------------------------------------------------------------------------------------------
+9.Для user1 задайте перманентно umask, снимающий право чтения для «прочих»
+-------------------------------------------------------------------------------------------
+
+
+root@eltex-practice2-pg2-v21:~# echo "umask 0006" >>  /home/user1/.bashrc
+
+
+---------------------------------------------------------------------------------------------------------------------
+10.Создайте каждым из пользователей новые файлы в каталоге /opt/share, удалите файлы созданные другими пользователями.
+---------------------------------------------------------------------------------------------------------------------
+
+
+root@eltex-practice2-pg2-v21:~# su user1
+user1@eltex-practice2-pg2-v21:/root$ touch /opt/share/user1.txt
+user1@eltex-practice2-pg2-v21:/root$ exit
+exit
+root@eltex-practice2-pg2-v21:~# su user2
+user2@eltex-practice2-pg2-v21:/root$ touch /opt/share/user2.txt
+user2@eltex-practice2-pg2-v21:/root$ exit
+exit
+root@eltex-practice2-pg2-v21:~# su user3
+This account is currently not available.
+root@eltex-practice2-pg2-v21:~# su --shell /bin/bash
+user3@eltex-practice2-pg2-v21:/root$ touch /opt/share/user3.txt
+user3@eltex-practice2-pg2-v21:/root$ ls -l /opt/share
+total 0
+-rw-rw---- 1 user1 group 0 Mar 15 06:38 user1.txt
+-rw-rw-r-- 1 user2 group 0 Mar 15 06:38 user2.txt
+-rw-rw-r-- 1 user3 group 0 Mar 15 06:41 user3.txt
+user3@eltex-practice2-pg2-v21:/root$ rm /opt/share/user1.txt
+user3@eltex-practice2-pg2-v21:/root$ ls -lp/opt/shareer1.txt
+total 0
+-rw-rw-r-- 1 user2 group 0 Mar 15 06:38 user2.txt
+-rw-rw-r-- 1 user3 group 0 Mar 15 06:41 user3.txt
+user3@eltex-practice2-pg2-v21:/root$ su user2
+Password:
+user2@eltex-practice2-pg2-v21:/root$ rm /opt/share/user3.txt
+user2@eltex-practice2-pg2-v21:/root$ su user1
+
+user1@eltex-practice2-pg2-v21:/root$ rm /opt/share/user2.txt
+user1@eltex-practice2-pg2-v21:/root$ ls -l /opt/share
+total 0
+
+user1@eltex-practice2-pg2-v21:/root$ exit
+exit
+user2@eltex-practice2-pg2-v21:/root$ exit
+exit
+user3@eltex-practice2-pg2-v21:/root$ exit
+exit
+
+
+----------------------------------------------------------------------------------------
+12.Повторите предыдущий пункт, предварительно установив sticky bit на каталоге /opt/share
+----------------------------------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:~# clear
+root@eltex-practice2-pg2-v21:~# chmod
+root@eltex-practice2-pg2-v21:~# chmod +t /opt/share
+root@eltex-practice2-pg2-v21:~# su user1
+user1@eltex-practice2-pg2-v21:/root$ touch /opt/share/user1.txt
+user1@eltex-practice2-pg2-v21:/root$ su user2
+Password:
+user2@eltex-practice2-pg2-v21:/root$ touch /opt/share/user2.txt
+user2@eltex-practice2-pg2-v21:/root$ su --shell /bin/bash user3
+Password:
+user3@eltex-practice2-pg2-v21:/root$ touch /opt/share/user3.txt
+user3@eltex-practice2-pg2-v21:/root$ ls -l /opt/share
+
+total 0
+-rw-rw---- 1 user1 group 0 Mar 15 06:50 user1.txt
+-rw-rw-r-- 1 user2 group 0 Mar 15 06:50 user2.txt
+-rw-rw-r-- 1 user3 group 0 Mar 15 06:52 user3.txt
+
+
+user3@eltex-practice2-pg2-v21:/root$ rm /opt/share/user2.txt
+rm: cannot remove '/opt/share/user2.txt': Operation not permitted
+user3@eltex-practice2-pg2-v21:/root$ su user2
+Password:
+user2@eltex-practice2-pg2-v21:/root$ rm /opt/share/user1.txt
+rm: cannot remove '/opt/share/user1.txt': Operation not permitted
+
+user2@eltex-practice2-pg2-v21:/root$ su user1
+Password:
+user1@eltex-practice2-pg2-v21:/root$ rm /opt/share/user3.txt
+rm: cannot remove '/opt/share/user3.txt': Operation not permitted
+user1@eltex-practice2-pg2-v21:/root$ exit
+exit
+user2@eltex-practice2-pg2-v21:/root$ exit
+exit
+user3@eltex-practice2-pg2-v21:/root$ exit
+exit
+
+
+----------------------------------------------------------------------------------------
+13.Разрешите user1 выполнять привилегированную команду dmesg при помощи команды sudo,
+ а user2 – при помощи скрипта на языке bash с установленным флагом SUID
+----------------------------------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:~#	echo "user1 ALL=(ALL) /bin/dmesg" >> /etc/sudoers
+root@eltex-practice2-pg2-v21:~#	touch /home/user2/dmesg_user2.sh
+
+root@eltex-practice2-pg2-v21:~#	cat /home/user2/dmesg_user2.sh
+#!/bin/bash
+
+/bin/dmesg
+
+root@eltex-practice2-pg2-v21:~# chmod +x /home/user2/dmesg_user2.sh
+root@eltex-practice2-pg2-v21:~# cchmod u+s /home/user2/dmesg_user2.sh
+root@eltex-practice2-pg2-v21:~# ls -l /home/user2
+total 0
+-rwsr-xr-x 1 root root 0 Mar 15 07:09 dmesg_user2.sh
+-rw-r--r-- 1 root root 0 Mar 15 07:09 dmesg_user2.shtouch
+
+root@eltex-practice2-pg2-v21:~# su user2
+user2@eltex-practice2-pg2-v21:/$ cd ~
+user2@eltex-practice2-pg2-v21:~$ ls
+dmesg_user2.sh	dmesg_user2.shtouch
+user2@eltex-practice2-pg2-v21:~$ ./dmesg_user2.sh
+dmesg: read kernel buffer failed: Operation not permitted
+
+//SUID на bash-скриптах не работает
+
+user1@eltex-practice2-pg2-v21:/home/user2$dmesg | head
+[sudo] password for user1:
+[    0.000000] Linux version 6.8.0-55-generic (buildd@lcy02-amd64-095) (x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0, GNU ld (GNU Binutils for Ubuntu) 2.42) #57-Ubuntu SMP PREEMPT_DYNAMIC Wed Feb 12 23:42:21 UTC 2025 (Ubuntu 6.8.0-55.57-generic 6.8.12)
+[    0.000000] Command line: BOOT_IMAGE=/vmlinuz-6.8.0-55-generic root=/dev/mapper/ubuntu--vg-ubuntu--lv ro
+[    0.000000] KERNEL supported cpus:
+[    0.000000]	 Intel GenuineIntel
+[    0.000000]	 AMD AuthenticAMD
+[    0.000000]	 Hygon HygonGenuine
+[    0.000000]	 Centaur CentaurHauls
+[    0.000000]	 zhaoxin   Shanghai
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+
+
+
+----------------------------------------------------------------------------------------
+14.Для всех пользователей user* задайте время действия пароля – 10 дней.
+----------------------------------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:/home/user2# cd ~
+root@eltex-practice2-pg2-v21:~# chage -M 10 user1
+root@eltex-practice2-pg2-v21:~# chage -M 10 user2
+root@eltex-practice2-pg2-v21:~# chage -M 10 user3
+
+
+------------------------------------------------------------------
+15.Отредактируйте файл /etc/motd, вписав туда свое имя и фамилию
+-----------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:~# echo "Чиркин Артём" >> /etc/motd
+
+Connection to 172.16.9.221 closed.
+
+eltex-pg2-v21@eltex-2026-spring:~$ ssh root@172.16.9.221
+Welcome to Ubuntu 24.04.2 LTS (GNU/Linux 6.8.0-55-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:	   https://landscape.canonical.com
+ * Support:	   https://ubuntu.com/pro
+
+ System information as of Sun Mar 15 08:47:52 AM UTC 2026
+
+  System load:	0.12		   Processes:		   109
+  Usage of /:	41.2% of 14.66GB   Users logged in:	   0
+  Memory usage: 11%		   IPv4 address for ens18: 172.16.9.221
+  Swap usage:	0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+87 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+*** System restart required ***
+Чиркин Артём
+Last login: Sun Mar 15 06:37:16 2026 from 172.16.8.4
+
+
+-----------------------------------------------------------------
+16.Отредактируйте файл /etc/motd, вписав туда свое имя и фамилию
+-----------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:~# rsync -a /etc/ /root/etc_backup
+root@eltex-practice2-pg2-v21:~# ls /root
+etc_backup  opt
+
+
+-----------------------------------------------------------------------------------
+17.Заархивируйте содержимое каталога /root/etc_backup архиватором tar,
+ используйте алгоритмы сжатия gzip, bzip2, 7zip, сравните размеры полученных файлов
+-----------------------------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:~# tar -cjf /root/etc_backup.tar.gz  /root/etc_backup
+
+root@eltex-practice2-pg2-v21:~# apt install bzip2
+root@eltex-practice2-pg2-v21:~# tar -cjf /root/etc_backup.tar.bz2  /root/etc_backup
+
+root@eltex-practice2-pg2-v21:~# apt install 7zip
+root@eltex-practice2-pg2-v21:~# tar -cf - /root/etc_backup  | 7za a -si /root/etc_backup.7z
+
+
+root@eltex-practice2-pg2-v21:~# ls -lh /root/etc_backup.*
+-rw-r--r-- 1 root root 476K Mar 15 09:20 /root/etc_backup.7z
+-rw-r--r-- 1 root root 554K Mar 15 09:17 /root/etc_backup.tar.bz2
+-rw-r--r-- 1 root root 584K Mar 15 09:13 /root/etc_backup.tar.gz
+
+// 7zip сжал лучше всех.
+
+-----------------------------------------------------------------------------------
+18. Отредактируйте файл /etc/motd, вписав туда текущую дату и время,
+ синхронизируйте каталог /root/etc_backup с каталогом /etc при помощи rsync,
+ добавьте файл motd в архив, сжатый gzip
+-----------------------------------------------------------------------------------
+
+
+root@eltex-practice2-pg2-v21:~# echo "Current date: $(date)" >> /etc/motd
+root@eltex-practice2-pg2-v21:~# rsync -av /etc/ /root/etc_backup
+sending incremental file list
+motd
+
+sent 70,018 bytes  received 283 bytes  140,602.00 bytes/sec
+total size is 2,366,893	 speedup is 33.67
+
+
+root@eltex-practice2-pg2-v21:~# gunzip etc_backup.tar.gz
+root@eltex-practice2-pg2-v21:~# ls
+etc_backup  etc_backup.7z  etc_backup.tar  etc_backup.tar.bz2  opt
+
+root@eltex-practice2-pg2-v21:~# tar -rf /root/etc_backup.tar /root/etc_backup/motd
+tar: Removing leading `/' from member names
+tar: Removing leading `/' from hard link targets
+root@eltex-practice2-pg2-v21:~# gzip etc_backup.tar
+root@eltex-practice2-pg2-v21:~# ls
+etc_backup  etc_backup.7z  etc_backup.tar.bz2  etc_backup.tar.gz  opt
+
+-----------------------------------------------------------------------------------
+19.Сравните содержимое архива, упакованного bzip2 с сорержимым каталога /root/etc_backup
+-----------------------------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:~# mkdir /tmp/archive_extract
+root@eltex-practice2-pg2-v21:~# tar -xjf etc_backup.tar.bz2 -C /tmp/archive_extract
+
+root@eltex-practice2-pg2-v21:/tmp/archive_extract# diff -r /tmp/archive_extract/root/etc_backup /root/etc_backup
+diff: /tmp/archive_extract/root/etc_backup: No such file or directory
+root@eltex-practice2-pg2-v21:/tmp/archive_extract# diff -r /tmp/archive_extract/etc_backup /root/etc_backup
+diff: /tmp/archive_extract/etc_backup/mtab: No such file or directory
+diff: /root/etc_backup/mtab: No such file or directory
+diff: /tmp/archive_extract/etc_backup/os-release: No such file or directory
+diff: /root/etc_backup/os-release: No such file or directory
+diff: /tmp/archive_extract/etc_backup/resolv.conf: No such file or directory
+diff: /root/etc_backup/resolv.conf: No such file or directory
+
+
+--------------------------------------------------------------------------------------------------------------------
+20.Распакуйте архивы etc_backup, упакованные gzip и 7zip в каталоги /root/etc_backup_gzip и /root/etc_backup_7zip,
+сравните программой diff файлы motd в этих каталогах.
+--------------------------------------------------------------------------------------------------------------------
+
+root@eltex-practice2-pg2-v21:~# mkdir etc_backup_gzip
+root@eltex-practice2-pg2-v21:~# tar -xzf etc_backup.tar.gz -C /root/etc_backup_gzip
+
+
+root@eltex-practice2-pg2-v21:~# mkdir etc_backup_7zip
+root@eltex-practice2-pg2-v21:~# 7z x etc_backup.7z -o/root/etc_backup_7zip
+root@eltex-practice2-pg2-v21:~# cd etc_backup_7zip
+root@eltex-practice2-pg2-v21:~# tar -xf etc_backup
+root@eltex-practice2-pg2-v21:~# diff etc_backup_gzip/root/etc_backup/motd
+etc_backup_7zip/root/etc_backup/motd
+< Current date: Sun Mar 15 09:27:39 AM UTC 2026
+
+//Файлы идентичны, кроме даты, которую мы сами вписали.
+
+Script done on 2026-03-15 17:37:43+07:00 [COMMAND_EXIT_CODE="1"]

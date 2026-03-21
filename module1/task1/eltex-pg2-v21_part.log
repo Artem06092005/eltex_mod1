@@ -1,0 +1,189 @@
+Script started on 2026-03-15 01:09:24+07:00 [TERM="dumb" TTY="/dev/pts/81" COLUMNS="139" LINES="32"]
+eltex-pg2-v21@eltex-2026-spring:~$ ls 
+ls           lsblk        lscpu        lsinitramfs  lsirq        lslogins     lsmod        lsof         lsusb        
+lsattr       lsb_release  lsfd         lsipc        lslocks      lsmem        lsns         lspci        
+eltex-pg2-v21@eltex-2026-spring:~$ ls   $HIST 
+$HISTCMD       $HISTCONTROL   $HISTFILE      $HISTFILESIZE  $HISTSIZE      
+eltex-pg2-v21@eltex-2026-spring:~$ $HIST         echo $HISTSIZE
+1000
+eltex-pg2-v21@eltex-2026-spring:~$ ls -d ~/.*
+/home/eltex-pg2-v21/.bash_history  /home/eltex-pg2-v21/.bashrc	/home/eltex-pg2-v21/.local    /home/eltex-pg2-v21/.ssh
+/home/eltex-pg2-v21/.bash_logout   /home/eltex-pg2-v21/.config	/home/eltex-pg2-v21/.profile  /home/eltex-pg2-v21/.viminfo
+eltex-pg2-v21@eltex-2026-spring:~$ export HISTTIMEFORMAT="%F %T "
+eltex-pg2-v21@eltex-2026-spring:~$ date
+Sun Mar 15 01:10:17 AM +07 2026
+eltex-pg2-v21@eltex-2026-spring:~$ cat $HISTFILE | tail
+echo 'find ~ -type f -mtime -1' >> ${USER}_part3.log
+which find
+type find
+which find
+echo 'which find' >> ${USER}_part3.log
+file /usr/bin/find
+file /boot/initrd.img*
+echo 'file /usr/bin/find' >> ${USER}_part3.log
+echo 'file /boot/initrd.img*' >> ${USER}_part3.log
+clear
+eltex-pg2-v21@eltex-2026-spring:~$ historu y |t  tail
+  441  2026-03-15 01:09:24 file /boot/initrd.img*
+  442  2026-03-15 01:09:24 echo 'file /usr/bin/find' >> ${USER}_part3.log
+  443  2026-03-15 01:09:24 echo 'file /boot/initrd.img*' >> ${USER}_part3.log
+  444  2026-03-15 01:09:24 clear
+  445  2026-03-15 01:09:47 echo $HISTSIZE
+  446  2026-03-15 01:09:53 ls -d ~/.*
+  447  2026-03-15 01:10:02 export HISTTIMEFORMAT="%F %T "
+  448  2026-03-15 01:10:17 date
+  449  2026-03-15 01:10:36 cat $HISTFILE | tail
+  450  2026-03-15 01:10:50 history | tail
+eltex-pg2-v21@eltex-2026-spring:~$ export PROMPT_COMMAND="history -a; history -c; history -r"
+eltex-pg2-v21@eltex-2026-spring:~$ 
+eltex-pg2-v21@eltex-2026-spring:~$ DATE=$(date +%Y-%m-%d)
+eltex-pg2-v21@eltex-2026-spring:~$ TIME=$(date +%H:%M:%S)
+eltex-pg2-v21@eltex-2026-spring:~$ echo &DATE
+[1] 776103
+
+bash: DATE: command not found
+[1]+  Done                    echo
+eltex-pg2-v21@eltex-2026-spring:~$ echo &DATEDATE $DATE
+2026-03-15
+eltex-pg2-v21@eltex-2026-spring:~$ echo $DATE    TIME
+01:11:20
+eltex-pg2-v21@eltex-2026-spring:~$ DATE_TIME="$DATE $TIME"
+eltex-pg2-v21@eltex-2026-spring:~$ echo DATE_TIME$DATE_TIME
+2026-03-15 01:11:20
+eltex-pg2-v21@eltex-2026-spring:~$ ls /bin /sbin | grep '[0-9]'
+addr2line
+b2sum
+base32
+base64
+bunzip2
+bzip2
+bzip2recover
+c89
+c89-gcc
+c99
+c99-gcc
+cpan5.36-x86_64-linux-gnu
+cpp-12
+diff3
+enc2xs
+gcc-12
+gcc-ar-12
+gcc-nm-12
+gcc-ranlib-12
+gcov-12
+gcov-dump-12
+gcov-tool-12
+grub-menulst2cfg
+grub-mkpasswd-pbkdf2
+grub-syslinux2cfg
+h2ph
+h2xs
+i386
+linux32
+linux64
+lto-dump-12
+md5sum
+md5sum.textutils
+pdb3
+pdb3.11
+perl5.36.0
+perl5.36-x86_64-linux-gnu
+ping4
+ping6
+pl2pm
+pod2html
+pod2man
+pod2text
+pod2usage
+py3clean
+py3compile
+py3versions
+pydoc3
+pydoc3.11
+pygettext3
+pygettext3.11
+python3
+python3.11
+sha1sum
+sha224sum
+sha256sum
+sha384sum
+sha512sum
+ssh-argv0
+systemd-id128
+traceroute6
+traceroute6.db
+x86_64
+x86_64-linux-gnu-addr2line
+x86_64-linux-gnu-ar
+x86_64-linux-gnu-as
+x86_64-linux-gnu-c++filt
+x86_64-linux-gnu-cpp
+x86_64-linux-gnu-cpp-12
+x86_64-linux-gnu-dwp
+x86_64-linux-gnu-elfedit
+x86_64-linux-gnu-gcc
+x86_64-linux-gnu-gcc-12
+x86_64-linux-gnu-gcc-ar
+x86_64-linux-gnu-gcc-ar-12
+x86_64-linux-gnu-gcc-nm
+x86_64-linux-gnu-gcc-nm-12
+x86_64-linux-gnu-gcc-ranlib
+x86_64-linux-gnu-gcc-ranlib-12
+x86_64-linux-gnu-gcov
+x86_64-linux-gnu-gcov-12
+x86_64-linux-gnu-gcov-dump
+x86_64-linux-gnu-gcov-dump-12
+x86_64-linux-gnu-gcov-tool
+x86_64-linux-gnu-gcov-tool-12
+x86_64-linux-gnu-gold
+x86_64-linux-gnu-gp-archive
+x86_64-linux-gnu-gp-collect-app
+x86_64-linux-gnu-gp-display-html
+x86_64-linux-gnu-gp-display-src
+x86_64-linux-gnu-gp-display-text
+x86_64-linux-gnu-gprof
+x86_64-linux-gnu-gprofng
+x86_64-linux-gnu-ld
+x86_64-linux-gnu-ld.bfd
+x86_64-linux-gnu-ld.gold
+x86_64-linux-gnu-lto-dump
+x86_64-linux-gnu-lto-dump-12
+x86_64-linux-gnu-nm
+x86_64-linux-gnu-objcopy
+x86_64-linux-gnu-objdump
+x86_64-linux-gnu-ranlib
+x86_64-linux-gnu-readelf
+x86_64-linux-gnu-size
+x86_64-linux-gnu-strings
+x86_64-linux-gnu-strip
+dumpe2fs
+e2freefrag
+e2fsck
+e2image
+e2label
+e2mmpstatus
+e2scrub
+e2scrub_all
+e2undo
+e4crypt
+e4defrag
+fsck.ext2
+fsck.ext3
+fsck.ext4
+killall5
+mke2fs
+mkfs.ext2
+mkfs.ext3
+mkfs.ext4
+resize2fs
+tune2fs
+update-grub2
+eltex-pg2-v21@eltex-2026-spring:~$ PS1='\u@\h-$(date "+%H:%M")> '
+eltex-pg2-v21@eltex-2026-spring-01:12> bash ---r nor    norc
+bash-5.2$ exit
+eltex-pg2-v21@eltex-2026-spring-01:12> bash --norcPS1='\u@\h-$(date "+%H:%M")> 'ls /bin /sbin | grep '[0-9]'  echo $DATE_TIME             DATE_TIME="$DATE $TIME"echo $TIME             DATE&DATETIME=$(date +%H:%M:%S)DATE=$(date +%Y-%m-%d)export PROMPT_COMMAND="history -a; history -c; history -r"
+
+eltex-pg2-v21@eltex-2026-spring-01:12> history | tail                                            cat $HISTFILE | tail                        TERM=dumb script -q "${USER}_part.log"-"${USER}_part.log"a"${USER}_part.log" "${USER}_part.log"
+eltex-pg2-v21@eltex-2026-spring:~$ mkdir -p ~/"$(date +%Y)"-{1..12}
+eltex-pg2-v21@eltex-2026-spring:~$ exit
