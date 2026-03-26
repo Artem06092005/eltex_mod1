@@ -4,26 +4,34 @@
 #include <stdlib.h>
 #include <string.h>
 
-static size_t counter = 0;
+static size_t counter = 1;
+
+void resetContactCounter() { counter = 1; }
 
 int initContactList(ContactList *contactList, size_t size) {
+	if (size == 0) return -1;
+	if (contactList->notes != NULL) return -2;
 	contactList->quantityNotes = 0;
 	contactList->size = size;
-	contactList->notes = malloc(sizeof(Note) * size);
-	if (contactList->notes == NULL) return -1;
-	contactList->notes->id = counter++;
-	contactList->notes->quantityLink = 0;
+	contactList->notes = calloc(size, sizeof(Note));
+	if (contactList->notes == NULL) return -3;
 	return 0;
 }
 
 void freeContactList(ContactList *contactList) {
+	if (contactList == NULL || contactList->notes == NULL) return;
 	for (int i = 0; i < contactList->quantityNotes; i++) {
-		for (int j = 0; j < contactList->notes[i].quantityLink; j++) {
-			free(contactList->notes[i].socialMediaLink[j]);
+		if (contactList->notes[i].socialMediaLink != NULL) {
+			for (int j = 0; j < contactList->notes[i].quantityLink; j++) {
+				free(contactList->notes[i].socialMediaLink[j]);
+			}
+			free(contactList->notes[i].socialMediaLink);
+			contactList->notes[i].socialMediaLink = NULL;
 		}
 	}
 
 	free(contactList->notes);
+	contactList->notes = NULL;
 }
 
 void showContactList(ContactList *contactList) {
@@ -178,6 +186,8 @@ int rmNote(ContactList *contactList, size_t id) {
 	for (int i = index; i < contactList->quantityNotes - 1; i++) {
 		contactList->notes[i] = contactList->notes[i + 1];
 	}
+	memset(&contactList->notes[contactList->quantityNotes - 1], 0,
+		   sizeof(Note));
 	contactList->quantityNotes--;
 	return 0;
 }

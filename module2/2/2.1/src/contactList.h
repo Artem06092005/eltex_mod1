@@ -33,6 +33,8 @@ int addContactFromNote(ContactList *contactList, Note *note);
 
 int initSocialMediaLink(Note *note, size_t l);
 
+void resetContactCounter();
+
 int findIndexById(const ContactList *contactList, const size_t id);
 
 int rmNote(ContactList *contactList, size_t id);

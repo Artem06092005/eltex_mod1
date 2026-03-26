@@ -7,8 +7,11 @@
 
 enum { start_size = 4 };
 int main() {
-	ContactList contactList;
-	initContactList(&contactList, start_size);
+	ContactList contactList = {0};
+	if (initContactList(&contactList, start_size) < 0) {
+		printf("Ошибка инициализации списка\n");
+		return -1;
+	}
 	size_t choice;
 	system("clear");
 	printMenu();
