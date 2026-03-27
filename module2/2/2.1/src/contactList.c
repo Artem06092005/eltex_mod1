@@ -1,5 +1,6 @@
 #include "contactList.h"
 
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -57,46 +58,43 @@ static int reallocContactList(ContactList *contactList) {
 	return 0;
 }
 
-int addContact(ContactList *contactList, const char *first_name,
-			   const char *second_name, const char *email,
-			   const size_t quantity_link, const char **social_media_link) {
+int addContactVariadic(ContactList *contactList, const char *first_name,
+					   const char *second_name, const char *email,
+					   int quantity_link, ...) {
 	if (contactList->size <= contactList->quantityNotes) {
 		if (reallocContactList(contactList) == -1) return -1;
 	}
 
 	Note *curr_note = &contactList->notes[contactList->quantityNotes];
 
-	if (first_name != NULL) {
-		strncpy(curr_note->firstName, first_name,
-				sizeof(contactList->notes->firstName) - 1);
-	} else {
-		curr_note->firstName[0] = '\0';
-	}
+	strncpy(curr_note->firstName, first_name ? first_name : "",
+			sizeof(curr_note->firstName) - 1);
+	strncpy(curr_note->secondName, second_name ? second_name : "",
+			sizeof(curr_note->secondName) - 1);
+	strncpy(curr_note->email, email ? email : "", sizeof(curr_note->email) - 1);
 
-	if (second_name != NULL) {
-		strncpy(curr_note->secondName, second_name,
-				sizeof(contactList->notes->secondName) - 1);
-	} else {
-		curr_note->secondName[0] = '\0';
-	}
-
-	if (email != NULL) {
-		strncpy(curr_note->email, email, sizeof(contactList->notes->email) - 1);
-	} else {
-		curr_note->email[0] = '\0';
-	}
 	curr_note->quantityLink = quantity_link;
 
-	if (social_media_link != NULL && quantity_link > 0) {
+	if (quantity_link > 0) {
 		curr_note->socialMediaLink = malloc(sizeof(char *) * quantity_link);
+		va_list args;
+		va_start(args, quantity_link);
+
 		for (int i = 0; i < quantity_link; i++) {
-			curr_note->socialMediaLink[i] =
-				malloc(sizeof(char) * max_length_link);
-			if (social_media_link[i] != NULL) {
-				strncpy(curr_note->socialMediaLink[i], social_media_link[i],
-						sizeof(char) * max_length_link - 1);
+			const char *link = va_arg(args, const char *);
+
+			curr_note->socialMediaLink[i] = malloc(max_length_link);
+			if (link != NULL) {
+				strncpy(curr_note->socialMediaLink[i], link,
+						max_length_link - 1);
+				curr_note->socialMediaLink[i][max_length_link - 1] = '\0';
+			} else {
+				curr_note->socialMediaLink[i][0] = '\0';
 			}
 		}
+		va_end(args);
+	} else {
+		curr_note->socialMediaLink = NULL;
 	}
 	curr_note->id = counter++;
 	contactList->quantityNotes++;

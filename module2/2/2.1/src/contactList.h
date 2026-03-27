@@ -25,10 +25,6 @@ void freeContactList(ContactList *contactList);
 
 void showContactList(ContactList *contactList);
 
-int addContact(ContactList *contactList, const char *first_name,
-			   const char *second_name, const char *email,
-			   const size_t quantity_link, const char **social_media_link);
-
 int addContactFromNote(ContactList *contactList, Note *note);
 
 int initSocialMediaLink(Note *note, size_t l);
@@ -44,3 +40,7 @@ int showNote(const ContactList *contactList, const size_t id);
 int editNote(ContactList *contactList, const size_t id, const char *first_name,
 			 const char *second_name, const char *email,
 			 const size_t *quantity_link, const char **socialMediaLink);
+
+int addContactVariadic(ContactList *contactList, const char *first_name,
+					   const char *second_name, const char *email,
+					   int quantity_link, ...);
